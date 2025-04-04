@@ -7,3 +7,12 @@ class SecretInput(BaseModel):
 
 class KeyOutput(BaseModel):
     key: str
+
+
+class KeyInput(BaseModel):
+    key: str
+
+
+class SecretOutput(BaseModel):
+    secret: str
+    status: str
