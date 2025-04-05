@@ -22,11 +22,11 @@ def decrypt_secret(encrypted_secret, key):
     return decrypted_secret
 
 
-def store_secret_in_redis(secret_key, secret):
+def store_secret_in_redis(secret_key, secret, ttl_seconds):
     """Сохраняем секрет в Redis"""
     redis_conn = get_redis_connection()
     redis_conn.set(secret_key, secret)
-    redis_conn.expire(secret_key, 300)  # Устаревание через 5 минуток
+    redis_conn.expire(secret_key, ttl_seconds)  # Устаревание через 5 минуток
 
 
 def read_secret_from_redis(secret_key):
