@@ -1,0 +1,38 @@
+services:
+  app:
+    container_name: my_app
+    build: .
+    ports:
+      - "8000:8000"
+    command: >
+      bash -c "uvicorn main:app --host 0.0.0.0 --port 8000"
+    environment:
+      - REDIS_HOST=redis
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=keep_secrets
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=qwsazx2000!
+      - REDIS_PORT=6379
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:12.0-alpine
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=keep_secrets
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=qwsazx2000!
+
+  redis:
+    image: redis:alpine
+    restart: always
+
+volumes:
+  pgdata:
