@@ -19,6 +19,7 @@ POSTGRESQL_URL = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{PO
 engine = create_engine(
     POSTGRESQL_URL)
 
+
 new_session = sessionmaker(autoflush=False, autocommit=False, bind=engine)
 
 Base.metadata.create_all(bind=engine)

@@ -11,7 +11,7 @@ from secret_api.cryptography import generate_key, encrypt_secret, decrypt_secret
 from secret_api.models import Logs
 from secret_api.schemas import KeyOutput, SecretInput, SecretOutput, LogOutput
 
-router = APIRouter()
+router = APIRouter(prefix="/api/v1")
 
 
 @router.post("/add_secret", response_model=KeyOutput)
@@ -104,7 +104,7 @@ async def delete_secret(
     encrypted_secret = read_secret_from_redis(key)
 
     if not encrypted_secret:
-        return JSONResponse(status_code=404, content={'status': 'Secret not found'})
+        return JSONResponse(status_code=404, content={'message': 'Secret not found'})
 
     delete_secret_from_redis(key)
 

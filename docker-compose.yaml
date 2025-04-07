@@ -1,7 +1,14 @@
 services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
   app:
     container_name: my_app
-    build: .
+    build: ./backend
     ports:
       - "8000:8000"
     command: >
@@ -36,3 +43,4 @@ services:
 
 volumes:
   pgdata:
+

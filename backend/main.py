@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from starlette.middleware.base import BaseHTTPMiddleware
-
+from fastapi.middleware.cors import CORSMiddleware
 from secret_api.router import router as secret
 
 
@@ -18,5 +18,26 @@ class HeadersMiddleware(BaseHTTPMiddleware):
         return response
 
 app = FastAPI()
+
+
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 app.include_router(secret)
+# app.include_router(pages)
 app.add_middleware(HeadersMiddleware)
+
+
+
+# app.mount("/static", StaticFiles(directory="./frontend/static/"), name="static")
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keep Secrets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script defer src="static/js/app.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Управление Секретами</h1>
+        <div class="text-center">
+            <p>
+                <b>"Keep Secrets"</b> - Ресурс позволяющий хранить и передавать ваши конфиденциальные данные.<br>
+                Доступ к данным можно получить только по <b>уникальному ключу</b>, выданному вам при успешном создании секрета.<br>
+                Секрет храниться у нас в <b>зашифрованном</b> виде и только <b>указанное вами время</b>.<br>
+                Секрет будет недоступен после чтения, удаления, истекшего времени жизни секрета.
+            </p>
+        </div>
+        <div class="text-center mt-4">
+            <button id="create-secret-button" class="btn btn-success">Создать секрет</button>
+            <button id="read-secret-button" class="btn btn-warning">Прочесть секрет</button>
+            <button id="delete-secret-button" class="btn btn-danger">Удалить секрет</button>
+        </div>
+
+        <!-- Модальное окно для создания секрета -->
+        <div id="create-modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Создание секрета</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="create-secret-form">
+                            <div class="mb-3">
+                                <label for="secret-text" class="form-label">Текст секрета:</label>
+                                <textarea id="secret-text" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ttl" class="form-label">Время жизни секрета (в секундах!):</label>
+                                <input type="number" id="ttl" class="form-control" min="1">
+                            </div>
+                            <button type="submit" class="btn btn-success">Отправить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для чтения секрета -->
+        <div id="read-modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Чтение секрета</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="read-secret-form">
+                            <div class="mb-3">
+                                <label for="key" class="form-label">Ключ доступа к секрету:</label>
+                                <input type="text" id="key" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-success">Получить секрет</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для удаления секрета -->
+        <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Удаление секрета</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="delete-secret-form">
+                            <div class="mb-3">
+                                <label for="key" class="form-label">Ключ доступа к секрету:</label>
+                                <input type="text" id="key" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-success">Удалить секрет</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>

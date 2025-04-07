@@ -153,3 +153,5 @@ deploy.sh
 secret_api/no_cache_headers.py
 my.db
 docker-compose.yaml
+node_modules/
+backend/pages/
